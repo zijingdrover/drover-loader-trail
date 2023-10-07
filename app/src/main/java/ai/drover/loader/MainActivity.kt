@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun installApk(path: String) {
         try {
-            if (canInstallApk()) {
+            if (mIsBind) {
                 val ret = AiBoxServiceManager.getInstance().packageManager.installApp(path)
                 Log.d(TAG, "install ret: $ret")
             } else {
@@ -102,13 +102,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun canInstallApk(): Boolean {
-        val packageManager = packageManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return packageManager.canRequestPackageInstalls()
-        }
-        // For below Android O, check with your permission logic
-        return true
-    }
+
 
 }
